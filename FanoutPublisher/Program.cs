@@ -46,13 +46,22 @@ namespace FanoutPublisher
             //#endregion
 
             //channel.BasicPublish("app.fanout","",null,Encoding.UTF8.GetBytes("This is Test from message 1"));
-            //channel.BasicPublish("app.fanout", "",null,Encoding.UTF8.GetBytes("This is Test from message 2"));
+            while (true)
+            {
+                Console.WriteLine("write Message");
+                string message = Console.ReadLine();
+                channel.BasicPublish("class.fanout1", "", null, Encoding.UTF8.GetBytes(message));
+                Console.WriteLine("Done");
+                Console.ReadKey();
+                Console.Clear();
+            }
+
 
             #region Delete Queue and Exchange
 
-            channel.QueueDelete("app.fanout.q1");
-            channel.QueueDelete("app.fanout.q2");
-            channel.ExchangeDelete("app.fanout");
+            //channel.QueueDelete("app.fanout.q1");
+            //channel.QueueDelete("app.fanout.q2");
+            //channel.ExchangeDelete("app.fanout");
 
             #endregion
 
